@@ -18,7 +18,6 @@ uv sync
 - wandb logging: `uv run python src/train.py --n-ncas 3 --epochs 10000 --device cuda --wandb`
 - run with config: `uv run python src/train.py --config configs/example.json`
 - live viz training: `uv run python src/train.py --n-ncas 3 --epochs 1000 --device cpu --live-viz`
-- visualize trained: `uv run python src/visualize_trained.py --model-path 2025-11-30_23-01-49 --steps 10000`
 
 ## Configs
 
