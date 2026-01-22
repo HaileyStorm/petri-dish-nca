@@ -106,6 +106,12 @@ When asking for help or filing an issue, include:
 - Whether `--live-viz` or `--wandb` was enabled.
 - If reproducible, the saved run directory.
 
+## PR Workflow (upstream)
+- Ensure your GitHub repo is a fork of `SakanaAI/petri-dish-nca` (a same-name repo that is not a fork cannot open PRs).
+- If needed, create a dedicated fork repo (e.g. `petri-dish-nca-fork`) and add it as a remote.
+- Push your feature branch to the fork and open the PR from that fork branch to `SakanaAI:main`.
+- If you want local-only docs (like `AGENTS.md`) excluded from the PR, keep those commits on your local/main and only push the feature branch.
+
 ## Suggested Extensions
 - Larger grids / more NCAs to probe open-endedness.
 - New competition rules (alternate similarity functions, different thresholds).
