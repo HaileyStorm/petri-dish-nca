@@ -17,6 +17,10 @@ and users have an accurate map.
 - Train from config: `uv run python src/train.py --config configs/example.json`
 - Live metrics/plots: `uv run python src/train.py --n-ncas 3 --epochs 1000 --device cpu --live-viz`
 - Visualize a trained run: `uv run python src/visualize_trained.py --model-path <run_dir>`
+- 3D grid size via CLI: `uv run python src/train.py --n-ncas 3 --epochs 200 --grid-size 10 10 10`
+- 3D view with grid override: `uv run python src/visualize_trained.py --model-path <run_dir> --grid-size 10 10 10`
+- 3D plotly view with mouse controls + playback: `uv run python src/visualize_trained.py --model-path <run_dir> --plotly`
+- Plotly playback speed + loop: `uv run python src/visualize_trained.py --model-path <run_dir> --plotly --plotly-speed 0.5 --plotly-loop`
 
 ## Repo Layout
 - `src/config.py`: Config dataclass, validation, device/seed setup, JSON load/save.
@@ -26,8 +30,8 @@ and users have an accurate map.
   - `CASunGroup`: competition, update resolution, sun background, save/load.
 - `src/world.py`: World state, grid pool, feature hooks, step scheduling.
 - `src/train.py`: CLI, training loop, wandb logging, optional live visualization.
-- `src/viz.py`: Snapshots, color mapping, entropy/compression metrics, video export.
-- `src/visualize_trained.py`: Load a saved run and render a live simulation.
+- `src/viz.py`: Snapshots, color mapping, 3D slice stacks (matplotlib/plotly), entropy/compression metrics, video export.
+- `src/visualize_trained.py`: Load a saved run and render a live simulation (3D slice stacks + plotly final view).
 - `configs/*.json`: Example configs.
 - `notebooks/interactive_viz.ipynb`: exploration/visualization notebook.
 
@@ -59,13 +63,15 @@ and users have an accurate map.
   growth term and summed losses in `update_models()`.
 
 ## Configuration Notes
+- `grid_size` is `(D, H, W)`; 2D `(H, W)` configs are still accepted and promoted to `(1, H, W)`.
 - `cell_state_dim` must be even (split into attack/defense).
 - `batch_size <= pool_size`.
-- `n_seeds * n_ncas <= grid_size[0] * grid_size[1]`.
+- `n_seeds * n_ncas <= grid_size[0] * grid_size[1] * grid_size[2]`.
 - `alive_visible` controls whether aliveness channels are visible to models.
 - `steps_before_update` + `steps_per_update` are the epoch schedule.
 - `burn_in` uses `SimpleBurnInFeature` to ramp step counts.
 - `sun_update_epoch_wait` controls when the sun updates.
+- Visualization-only controls: `viz_slice_axis`, `viz_slice_stride`, `viz_slice_spacing`, `viz_slice_alpha`, `viz_max_slices`.
 
 ## Adding Features (recommended pattern)
 1) Add new config fields in `src/config.py` with validation if needed.
