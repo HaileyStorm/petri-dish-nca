@@ -20,7 +20,7 @@ and users have an accurate map.
 - 3D grid size via CLI: `uv run python src/train.py --n-ncas 3 --epochs 200 --grid-size 10 10 10`
 - 3D view with grid override: `uv run python src/visualize_trained.py --model-path <run_dir> --grid-size 10 10 10`
 - 3D plotly view with mouse controls + playback: `uv run python src/visualize_trained.py --model-path <run_dir> --plotly`
-- Plotly playback speed + loop: `uv run python src/visualize_trained.py --model-path <run_dir> --plotly --plotly-speed 0.5 --plotly-loop`
+- Plotly playback speed: `uv run python src/visualize_trained.py --model-path <run_dir> --plotly --plotly-speed 0.5`
 
 ## Repo Layout
 - `src/config.py`: Config dataclass, validation, device/seed setup, JSON load/save.
@@ -66,12 +66,16 @@ and users have an accurate map.
 - `grid_size` is `(D, H, W)`; 2D `(H, W)` configs are still accepted and promoted to `(1, H, W)`.
 - `cell_state_dim` must be even (split into attack/defense).
 - `batch_size <= pool_size`.
+- `batch_size` can be overridden via `--batch-size` on `src/train.py`.
+- `visualize_trained.py` also supports `--batch-size` to override the saved config during visualization.
 - `n_seeds * n_ncas <= grid_size[0] * grid_size[1] * grid_size[2]`.
 - `alive_visible` controls whether aliveness channels are visible to models.
 - `steps_before_update` + `steps_per_update` are the epoch schedule.
 - `burn_in` uses `SimpleBurnInFeature` to ramp step counts.
 - `sun_update_epoch_wait` controls when the sun updates.
 - Visualization-only controls: `viz_slice_axis`, `viz_slice_stride`, `viz_slice_spacing`, `viz_slice_alpha`, `viz_max_slices`.
+- Plotly visualization includes a slice-end slider to hide later slices.
+- Plotly visualization shows NCA population lines (percent occupied) up to the current step.
 
 ## Adding Features (recommended pattern)
 1) Add new config fields in `src/config.py` with validation if needed.
