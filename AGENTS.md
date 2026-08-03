@@ -117,3 +117,12 @@ When asking for help or filing an issue, include:
 - New competition rules (alternate similarity functions, different thresholds).
 - Additional metrics (entropy, compression, novelty scores).
 - Multi-GPU or distributed training for large-scale experiments.
+
+<!-- codex-project-policy:compression-v1 -->
+## Compression, randomized breadth, and memory
+
+- Give reuse, simplification, and deletion equal consideration to addition. Finish each task with an obsolescence audit covering code, tests, comments, docs, configuration, and tracked work.
+- Remove replaced behavior throughout the owned scope unless a verified experiment, checkpoint, compatibility, migration, history, or provenance obligation requires both; name that obligation and removal gate.
+- Avoid comments that narrate obvious function-body behavior. Remove stale comments and completed TODOs while preserving non-obvious NCA, training, reproducibility, and upstream-fork constraints.
+- Seeded recursive partition search and Verbalized Sampling may be explored for bounded candidate diversity only with recorded universe, seed/path, coverage, and evaluation. Never substitute them for deterministic metrics or release gates.
+- Keep memory content separate from reference-recency metadata. Recency may delay compression but never outranks experiment provenance, corrections, or explicit retention; GC proposals remain advisory and non-destructive.
