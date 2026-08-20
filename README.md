@@ -33,3 +33,7 @@ for `visualize_trained.py`.
 
 For additional configurations, you can load a JSON config file. Any parameters not specified in the config file will be set their default value in `src/config.py`.
 `grid_size` is `(D, H, W)`; 2D configs `(H, W)` are still accepted and promoted to `(1, H, W)`.
+
+## Support
+
+This project is free. Donations are entirely optional and never affect access or support; they sustain Hailey's open-source work. You can use [Buy Me a Coffee](https://buymeacoffee.com/threadspan), or see the [donation details, safety, and privacy notes](https://github.com/HaileyStorm/threadspan/blob/main/docs/DONATIONS.md). No route is preferred. This repository does not collect donor identities or telemetry, and it never asks for wallet keys; verify recipients independently because transfers may be irreversible.
